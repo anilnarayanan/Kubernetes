@@ -1,0 +1,19 @@
+{
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": 
+    {
+      "clusterName": "clusterStudent",
+      "annotations": 
+      {
+        "version": "0.1",
+        "project": "Student",
+        "Description": "My first student project"
+      },
+      "labels": 
+      {
+        "cluster": "student"
+      },
+      "name": "student"
+    }
+}
