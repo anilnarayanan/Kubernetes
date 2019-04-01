@@ -1,0 +1,68 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "ReplicaSet",
+  "metadata": 
+    {
+      "clusterName": "clusterStudent",
+      "annotations": 
+      {
+        "version": "latest",
+        "project": "nginx",
+        "Description": "Liveness Probe"
+      },
+      "labels": 
+      {
+        "app": "hello"
+      },
+      "name": "hello"
+    },
+  "spec":
+  {
+    "replicas": 2,
+    "selector": 
+    {
+      "matchLabels": 
+      {
+        "app": "hello"
+      }
+    },
+    "template":
+    {
+      "metadata":
+      {
+        "name": "student",
+        "namespace": "student",
+        "labels":
+        {
+          "app": "hello"
+        }
+      },
+      "spec":
+      {
+        "containers":
+        [
+          {
+            "name": "hello",
+            "image": "cloudnatived/demo:hello",
+            "ports": 
+            [
+              {
+              	"containerPort": 8888,
+              	"protocol": "TCP",
+              	"name": "http"
+              }
+            ],
+            "resources":
+            {
+              "limits":
+              {
+                "memory": "10Mi",
+                "cpu": "0.5"
+              }
+            }
+          }
+        ]
+      }
+    }
+	}
+}
