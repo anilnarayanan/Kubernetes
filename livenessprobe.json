@@ -44,6 +44,14 @@
           {
             "name": "hello",
             "image": "cloudnatived/demo:hello",
+            "livenessProbe":
+            {
+              "httpGet":
+              {
+                "path": "/",
+                "port": 8888
+              }
+            },
             "ports": 
             [
               {
@@ -51,18 +59,11 @@
               	"protocol": "TCP",
               	"name": "http"
               }
-            ],
-            "resources":
-            {
-              "limits":
-              {
-                "memory": "10Mi",
-                "cpu": "0.5"
-              }
-            }
+            ]
           }
         ]
       }
     }
 	}
 }
+
