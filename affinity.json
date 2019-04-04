@@ -1,0 +1,77 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "demo"
+  },
+  "spec": {
+    "replicas": 3,
+    "selector": {
+      "matchLabels": {
+        "app": "demo"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "demo"
+        }
+      },
+      "spec": {
+        "affinity":
+        {
+          "nodeAffinity": 
+            {
+              "preferredDuringSchedulingIgnoredDuringExecution":
+              [
+                {
+                    "weight": 100,
+                    "preference":
+                    {
+                        "matchExpressions":
+                        [
+                            {
+                                "key": "kubernetes.io/hostname",
+                                "operator": "In",
+                                "values":
+                                [
+                                    "worker1.vagrant.vm"
+                                ]
+                            }
+                        ]
+                    }
+                }
+              ]
+            }
+        },
+        "containers": [
+          {
+            "name": "demo",
+            "image": "cloudnatived/demo:hello",
+            "ports": [
+              {
+                "containerPort": 8888
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/",
+                "port": 8888
+              },
+              "initialDelaySeconds": 3,
+              "periodSeconds": 3
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/",
+                "port": 8888
+              },
+              "initialDelaySeconds": 3,
+              "periodSeconds": 3
+            }
+          }
+        ]
+      }
+    }
+  }
+}
