@@ -1,0 +1,38 @@
+{
+    "kind": "Deployment",
+    "apiVersion": "apps/v1beta1",
+    "metadata": {
+        "name": "hello",
+        "creationTimestamp": null,
+        "labels": {
+            "run": "hello"
+        }
+    },
+    "spec": {
+        "replicas": 1,
+        "selector": {
+            "matchLabels": {
+                "run": "hello"
+            }
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "run": "hello"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "hello",
+                        "image": "cloudnatived/demo:hello",
+                        "resources": {}
+                    }
+                ]
+            }
+        },
+        "strategy": {}
+    },
+    "status": {}
+}
