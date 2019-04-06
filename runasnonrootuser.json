@@ -1,0 +1,39 @@
+{
+	"kind": "Deployment",
+	"apiVersion": "apps/v1beta1",
+	"metadata": {
+		"name": "runasnonrootuser",
+		"creationTimestamp": null,
+		"labels": {
+			"run": "runasnonrootuser"
+		}
+	},
+	"spec": {
+		"replicas": 1,
+		"selector": {
+			"matchLabels": {
+				"run": "runasnonrootuser"
+			}
+		},
+		"template": {
+			"metadata": {
+				"creationTimestamp": null,
+				"labels": {
+					"run": "runasnonrootuser"
+				}
+			},
+			"spec": {
+				"securityContext": {
+					"runAsNonRoot": true
+				},
+				"containers": [{
+					"name": "runasnonrootuser",
+					"image": "gcr.io/google-samples/node-hello:1.0",
+					"resources": {}
+				}]
+			}
+		},
+		"strategy": {}
+	},
+	"status": {}
+}
