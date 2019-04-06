@@ -1,0 +1,39 @@
+{
+	"kind": "Deployment",
+	"apiVersion": "apps/v1beta1",
+	"metadata": {
+		"name": "readonlyrootfilesystem",
+		"creationTimestamp": null,
+		"labels": {
+			"run": "readOnlyRootFilesystem"
+		}
+	},
+	"spec": {
+		"replicas": 1,
+		"selector": {
+			"matchLabels": {
+				"run": "readOnlyRootFilesystem"
+			}
+		},
+		"template": {
+			"metadata": {
+				"creationTimestamp": null,
+				"labels": {
+					"run": "readOnlyRootFilesystem"
+				}
+			},
+			"spec": {
+				"containers": [{
+					"name": "readonlyrootfilesystem",
+					"image": "gcr.io/google-samples/node-hello:1.0",
+					"resources": {},
+					"securityContext": {
+						"readOnlyRootFilesystem": true
+					}
+				}]
+			}
+		},
+		"strategy": {}
+	},
+	"status": {}
+}
