@@ -1,0 +1,72 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "apps/v1beta1",
+  "metadata": {
+    "name": "sharevolumes",
+    "creationTimestamp": null,
+    "labels": {
+      "run": "sharevolumes"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "run": "sharevolumes"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "run": "sharevolumes"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "first",
+            "image": "nginx",
+            "resources": {},
+            "volumeMounts": 
+            [
+              {
+                "mountPath": "/cache",
+                "name": "cache-volume"
+              }
+            ],
+            "ports":
+            [
+              {
+                "containerPort": 80,
+                "hostPort": 8080
+              }
+            ]
+          },
+          {
+            "name": "second",
+            "image": "gcr.io/google-samples/node-hello:1.0",
+            "resources": {},
+            "volumeMounts": 
+            [
+              {
+                "mountPath": "/cache",
+                "name": "cache-volume"
+              }
+            ]
+          }
+          
+        ],
+        "volumes": 
+        [
+          {
+            "name": "cache-volume",
+            "emptyDir": {}
+          }
+        ]
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}
